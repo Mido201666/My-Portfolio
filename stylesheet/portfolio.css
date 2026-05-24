@@ -1,0 +1,179 @@
+/* Global Image Fix */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Navbar */
+.Navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.Navbar a {
+    color: white;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.Navbar a:hover,
+.Navbar .active {
+    background-color: #575757;
+    border-radius: 5px;
+}
+
+.Theme_Button {
+    margin-left: 20px;
+    padding: 8px 15px;
+    cursor: pointer;
+    border: none;
+    background-color: #444;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.Theme_Button:hover {
+    background-color: #666;
+}
+
+/* Dark Mode */
+.dark {
+    background-color: #111;
+    color: #fff;
+}
+
+/* Hero */
+.Hero {
+    background: url('../images/programmer.jpg') center/cover no-repeat;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.Hero_Text h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.Hero_Text p {
+    font-size: 20px;
+}
+
+/* Sections */
+.Section {
+    padding: 60px 10%;
+}
+
+.Alt {
+    background-color: #e9e9e9;
+}
+
+.center {
+    text-align: center;
+}
+
+/* Layout */
+.Row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.Column_1, .Column_2 {
+    flex: 1;
+    min-width: 300px;
+}
+
+.Column_2 img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin: auto;
+}
+
+/* Project Cards */
+.Project_Card {
+    width: 300px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.Project_Card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.Project_Card a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.Project_Card a:hover {
+    text-decoration: underline;
+}
+
+/* Contact Form */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form input, form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+}
+
+form input[type="submit"] {
+    background-color: #222;
+    color: white;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #444;
+}
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+.Navbar {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    background-color: #222;
+    padding: 15px;
+}
+
+.Navbar a {
+    color: white;
+    padding: 14px 25px;
+    text-decoration: none;
+    font-size: 18px;
+    display: inline-block;
+}

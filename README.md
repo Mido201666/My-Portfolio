@@ -1,41 +1,61 @@
-# Mohammed's Portfolio Website
+ Mohammed's HTML & CSS Portfolio
 
-Welcome to my personal portfolio website!
+Welcome to my portfolio website!  
+This project was created as part of the HTML and CSS module in The Academy of learning Software Developer Boot Camp.
 
-This project was created as part of my Software Developer Boot Camp at Academy of Learning.
+---
 
-## About
+ About This Project
+This is a simple portfolio website built using **HTML and CSS**.  
+It includes the following sections:
 
-A personal portfolio website built with **HTML**, **CSS**, and **JavaScript**. It includes the following sections:
+- Home  
+- About  
+- Projects  
+- Contact  
 
-- Home
-- About
-- Projects
-- GitHub
-- Contact
+The purpose of this project is to practice:
+- Structuring a full webpage  
+- Using CSS for layout and styling  
+- Organizing files and folders  
+- Preparing a website for deployment  
+- Publishing a live website online  
 
-## Projects Featured
+---
 
-### Movie Booking Website
-A Bootstrap web application for booking movie tickets online.
 
-### World Travel Website
-A one-page travel website built with HTML and CSS.
 
-### Car Insurance MVC
-An MVC web application that mimics a car insurance website. Takes user input on policy information and calculates a quote based on business logic. Includes an admin page for staff to view issued quotes. Built with **C# and .NET Framework**.
 
-### Employee Quit
-A C# .NET application for managing employee records and tracking employee departures within an organization. Built with **C# and .NET Framework**.
 
-## Technologies Used
+  Projects Completed in This Course
+Here is a list of the assignments and projects I completed during the HTML & CSS module:
+https://github.com/Mido201666/One-Page-Website
+https://github.com/Mido201666/bootstrap4_project
+https://github.com/Mido201666/DUAA
+also there are some Assigments that I practice without uploading it 
 
-- HTML5
-- CSS3
-- JavaScript
-- C# / .NET Framework
-- ASP.NET MVC
+- W3Schools HTML Assignment  
+- W3Schools CSS Assignment  
+- Challenge 5‑1 (Image editing with CSS)  
+- Challenge 5‑2  
+- Challenge 5‑3  
+- Student Portfolio Code Review  
+- Altering Code Assignment  
+- Creating My Portfolio Website  
+- Publishing My Website (GitHub Pages or Hosting)
 
-## Live Site
+---
+  Technologies Used
+- HTML5  
+- CSS3  
+- Visual Studio Code  
+- Git & GitHub  
+- GitHub Pages (for deployment)
+- I downloaded an app called filezilla but still did not used it yet.
+you are wlecome to see my profile.
+---
 
-[View Portfolio](https://mido201666.github.io/My-Portfolio/)
+t
+If you’d like to reach out, feel free to contact me through the form on my website.
+
+Thank you for visiting

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammed | Portfolio</title>
+    <link rel="shortcut icon" type="img/jpg" href="images/coding_icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --bg2: #10101a;
+            --purple: #7c3aed;
+            --purple-light: #a855f7;
+            --cyan: #06b6d4;
+            --white: #f1f5f9;
+            --gray: #94a3b8;
+            --card-bg: #13131f;
+            --border: rgba(124,58,237,0.2);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--white); font-family: 'Syne', sans-serif; overflow-x: hidden; }
+
+        .Navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; gap: 1.5rem; padding: 1rem 2rem; background: rgba(10,10,15,0.9); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+        .Navbar a { color: var(--gray); text-decoration: none; font-family: 'Space Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.3s; position: relative; }
+        .Navbar a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--purple-light); transition: width 0.3s; }
+        .Navbar a:hover, .Navbar a.active { color: var(--purple-light); }
+        .Navbar a:hover::after { width: 100%; }
+        .Navbar a.contact-btn { background: var(--purple); color: white; padding: 0.4rem 1rem; border-radius: 4px; cursor: pointer; }
+        .Navbar a.contact-btn:hover { background: var(--purple-light); }
+        .Navbar a.contact-btn::after { display: none; }
+
+        #Home { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding-top: 80px; }
+        .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 40%, rgba(124,58,237,0.15) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(6,182,212,0.08) 0%, transparent 50%); }
+        .grid-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(124,58,237,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(124,58,237,0.05) 1px, transparent 1px); background-size: 60px 60px; }
+        .hero-content { position: relative; z-index: 1; text-align: center; padding: 2rem; animation: fadeUp 1s ease both; }
+        .hero-tag { display: inline-block; font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--cyan); border: 1px solid var(--cyan); padding: 0.3rem 1rem; border-radius: 50px; margin-bottom: 1.5rem; letter-spacing: 0.15em; }
+        .hero-content h1 { font-size: clamp(2.5rem, 8vw, 6rem); font-weight: 800; line-height: 1.05; margin-bottom: 1rem; }
+        .hero-content h1 span { background: linear-gradient(135deg, var(--purple-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-sub { font-size: 1.1rem; color: var(--gray); max-width: 500px; margin: 0 auto 2.5rem; line-height: 1.7; }
+        .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-primary { background: var(--purple); color: white; padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: all 0.3s; border: none; cursor: pointer; font-family: 'Syne', sans-serif; font-size: 1rem; }
+        .btn-primary:hover { background: var(--purple-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(124,58,237,0.4); }
+        .btn-outline { background: transparent; color: var(--white); padding: 0.8rem 2rem; border-radius: 6px; text-decoration: none; font-weight: 600; transition: all 0.3s; border: 1px solid var(--border); cursor: pointer; font-family: 'Syne', sans-serif; font-size: 1rem; }
+        .btn-outline:hover { border-color: var(--purple-light); color: var(--purple-light); transform: translateY(-2px); }
+
+        .particle { position: absolute; border-radius: 50%; animation: float linear infinite; opacity: 0.4; }
+        @keyframes float { 0% { transform: translateY(100vh); opacity: 0; } 10% { opacity: 0.4; } 90% { opacity: 0.4; } 100% { transform: translateY(-100px); opacity: 0; } }
+
+        .ticker-wrap { overflow: hidden; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 0; }
+        .ticker { display: flex; gap: 3rem; animation: ticker 25s linear infinite; width: max-content; }
+        .ticker-item { font-family: 'Space Mono', monospace; font-size: 0.85rem; color: var(--gray); white-space: nowrap; display: flex; align-items: center; gap: 0.5rem; }
+        .ticker-item span { color: var(--purple-light); }
+        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+        .section-label { font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--purple-light); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; }
+        .section-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 3rem; line-height: 1.1; }
+
+        .about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
+        .about-img-wrap { position: relative; }
+        .about-img-wrap img { width: 100%; border-radius: 12px; filter: grayscale(20%); display: block; }
+        .about-img-wrap::before { content: ''; position: absolute; inset: -8px; border: 2px solid var(--purple); border-radius: 16px; z-index: -1; }
+        .about-img-wrap::after { content: ''; position: absolute; inset: -16px; border: 1px solid rgba(124,58,237,0.2); border-radius: 20px; z-index: -2; }
+        .about-text p { color: var(--gray); line-height: 1.8; font-size: 1.05rem; margin-bottom: 1.5rem; }
+        .skills-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+        .chip { background: var(--card-bg); border: 1px solid var(--border); color: var(--purple-light); padding: 0.35rem 0.9rem; border-radius: 50px; font-family: 'Space Mono', monospace; font-size: 0.75rem; }
+
+        #Slideshow { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 4rem 2rem; }
+        #Slideshow_Container { position: relative; max-width: 700px; margin: 0 auto; }
+        .mySlides { display: none; }
+        .mySlides.active-slide { display: block; }
+        .Slideshow_Images { width: 100%; max-height: 380px; object-fit: cover; border-radius: 12px; border: 1px solid var(--border); }
+        .slide-text { text-align: center; margin-top: 1rem; color: var(--gray); font-size: 1rem; font-style: italic; }
+        .slide-controls { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 1.5rem; }
+        .slide-btn { background: var(--card-bg); border: 1px solid var(--border); color: var(--white); width: 42px; height: 42px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+        .slide-btn:hover { background: var(--purple); border-color: var(--purple); }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; transition: background 0.3s, transform 0.3s; display: inline-block; margin: 0 3px; }
+        .dot.active-dot { background: var(--purple-light); transform: scale(1.3); }
+
+        /* FILTER TABS */
+        .filter-tabs { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2rem; }
+        .filter-tab { background: var(--card-bg); border: 1px solid var(--border); color: var(--gray); padding: 0.4rem 1.2rem; border-radius: 50px; font-family: 'Space Mono', monospace; font-size: 0.75rem; cursor: pointer; transition: all 0.3s; }
+        .filter-tab:hover, .filter-tab.active { background: var(--purple); border-color: var(--purple); color: white; }
+
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+        .project-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: all 0.3s; }
+        .project-card:hover { border-color: var(--purple); transform: translateY(-6px); box-shadow: 0 20px 40px rgba(124,58,237,0.2); }
+        .project-card[data-hidden="true"] { display: none; }
+        .project-card-placeholder { width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; }
+        .ph-blue { background: linear-gradient(135deg, #0c1445, #1a237e); }
+        .ph-purple { background: linear-gradient(135deg, #1a0533, #4a1a6b); }
+        .ph-dark { background: linear-gradient(135deg, #1e1b4b, #2d1b69); }
+        .ph-green { background: linear-gradient(135deg, #0d2b1a, #1b5e3b); }
+        .ph-red { background: linear-gradient(135deg, #2b0d0d, #5e1b1b); }
+        .ph-orange { background: linear-gradient(135deg, #2b1a0d, #5e3a1b); }
+        .ph-teal { background: linear-gradient(135deg, #0d2b2b, #1b5e5e); }
+        .ph-gold { background: linear-gradient(135deg, #2b2a0d, #5e5a1b); }
+        .ph-ai { background: linear-gradient(135deg, #0d0d2b, #1a1a5e); }
+        .project-card-body { padding: 1.25rem; }
+        .project-tag { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--cyan); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .project-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--white); }
+        .project-card p { color: var(--gray); font-size: 0.88rem; line-height: 1.6; margin-bottom: 1rem; }
+        .project-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--purple-light); text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: gap 0.3s; }
+        .project-link:hover { gap: 0.7rem; }
+
+        /* AI SECTION */
+        .ai-section { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .ai-banner { background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.1)); border: 1px solid var(--border); border-radius: 16px; padding: 3rem; display: flex; gap: 3rem; align-items: center; }
+        .ai-icon { font-size: 5rem; flex-shrink: 0; }
+        .ai-content h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, var(--purple-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .ai-content p { color: var(--gray); line-height: 1.8; margin-bottom: 1.5rem; }
+        .ai-tools { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .ai-tool { background: var(--card-bg); border: 1px solid var(--border); color: var(--purple-light); padding: 0.35rem 0.9rem; border-radius: 50px; font-family: 'Space Mono', monospace; font-size: 0.75rem; }
+
+        .github-section { text-align: center; padding: 5rem 2rem; background: var(--bg); border-top: 1px solid var(--border); }
+        .github-card { display: inline-flex; align-items: center; gap: 1.5rem; background: var(--card-bg); border: 1px solid var(--border); padding: 2rem 3rem; border-radius: 16px; text-decoration: none; transition: all 0.3s; margin-top: 2rem; }
+        .github-card:hover { border-color: var(--purple); transform: translateY(-4px); box-shadow: 0 16px 32px rgba(124,58,237,0.2); }
+        .github-card svg { width: 40px; height: 40px; fill: var(--white); }
+        .github-card-text { text-align: left; }
+        .github-card-text strong { display: block; font-size: 1.1rem; color: var(--white); }
+        .github-card-text span { font-size: 0.9rem; color: var(--gray); }
+
+        .form-popup { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); align-items: center; justify-content: center; }
+        .form-popup.open { display: flex; }
+        .form-container { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; width: 90%; max-width: 480px; animation: fadeUp 0.4s ease; }
+        .form-container h1 { font-size: 1.8rem; margin-bottom: 1.5rem; background: linear-gradient(135deg, var(--purple-light), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .form-container label { display: block; font-size: 0.85rem; color: var(--gray); margin-bottom: 0.4rem; margin-top: 1rem; font-family: 'Space Mono', monospace; }
+        .form-container input { width: 100%; background: var(--bg2); border: 1px solid var(--border); border-radius: 6px; padding: 0.7rem 1rem; color: var(--white); font-family: 'Syne', sans-serif; font-size: 0.95rem; transition: border-color 0.3s; outline: none; }
+        .form-container input:focus { border-color: var(--purple-light); }
+        .form-btns { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .btn-submit { flex: 1; background: var(--purple); color: white; border: none; padding: 0.8rem; border-radius: 6px; cursor: pointer; font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 600; transition: background 0.3s; }
+        .btn-submit:hover { background: var(--purple-light); }
+        .btn-cancel { flex: 1; background: transparent; color: var(--gray); border: 1px solid var(--border); padding: 0.8rem; border-radius: 6px; cursor: pointer; font-family: 'Syne', sans-serif; font-size: 1rem; transition: all 0.3s; }
+        .btn-cancel:hover { border-color: var(--purple-light); color: var(--purple-light); }
+
+        footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); color: var(--gray); font-family: 'Space Mono', monospace; font-size: 0.8rem; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .ai-banner { flex-direction: column; text-align: center; padding: 2rem; }
+            .Navbar { gap: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="Navbar">
+    <a class="active" href="#Home">Home</a>
+    <a href="#Slideshow">Skills</a>
+    <a href="#About">About</a>
+    <a href="#Projects">Projects</a>
+    <a href="#AI">AI</a>
+    <a href="#GitHub">GitHub</a>
+    <a onclick="openForm()" class="contact-btn">Contact</a>
+</nav>
+
+<!-- HERO -->
+<div id="Home">
+    <div class="hero-bg"></div>
+    <div class="grid-lines"></div>
+    <div class="particle" style="left:8%;width:4px;height:4px;background:var(--purple-light);animation-duration:8s;animation-delay:0s;"></div>
+    <div class="particle" style="left:22%;width:3px;height:3px;background:var(--cyan);animation-duration:11s;animation-delay:2s;"></div>
+    <div class="particle" style="left:48%;width:5px;height:5px;background:var(--purple);animation-duration:9s;animation-delay:1s;"></div>
+    <div class="particle" style="left:68%;width:3px;height:3px;background:var(--cyan);animation-duration:13s;animation-delay:3s;"></div>
+    <div class="particle" style="left:88%;width:4px;height:4px;background:var(--purple-light);animation-duration:10s;animation-delay:0.5s;"></div>
+    <div class="hero-content">
+        <div class="hero-tag">✦ Available for opportunities</div>
+        <h1>Mohammed's<br><span>Portfolio</span></h1>
+        <p class="hero-sub">Full-stack developer & AI content creator — passionate about building modern web applications and AI-generated experiences.</p>
+        <div class="hero-btns">
+            <a href="#Projects" class="btn-primary">View My Work →</a>
+            <a onclick="openForm()" class="btn-outline">Get In Touch</a>
+        </div>
+    </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+    <div class="ticker">
+        <span class="ticker-item"><span>✦</span> HTML & CSS</span>
+        <span class="ticker-item"><span>✦</span> JavaScript</span>
+        <span class="ticker-item"><span>✦</span> C# & .NET</span>
+        <span class="ticker-item"><span>✦</span> ASP.NET MVC</span>
+        <span class="ticker-item"><span>✦</span> SQL & Databases</span>
+        <span class="ticker-item"><span>✦</span> Bootstrap</span>
+        <span class="ticker-item"><span>✦</span> Visual Studio</span>
+        <span class="ticker-item"><span>✦</span> Git & GitHub</span>
+        <span class="ticker-item"><span>✦</span> AI Video Generation</span>
+        <span class="ticker-item"><span>✦</span> HTML & CSS</span>
+        <span class="ticker-item"><span>✦</span> JavaScript</span>
+        <span class="ticker-item"><span>✦</span> C# & .NET</span>
+        <span class="ticker-item"><span>✦</span> ASP.NET MVC</span>
+        <span class="ticker-item"><span>✦</span> SQL & Databases</span>
+        <span class="ticker-item"><span>✦</span> Bootstrap</span>
+        <span class="ticker-item"><span>✦</span> Visual Studio</span>
+        <span class="ticker-item"><span>✦</span> Git & GitHub</span>
+        <span class="ticker-item"><span>✦</span> AI Video Generation</span>
+    </div>
+</div>
+
+<!-- SLIDESHOW -->
+<div id="Slideshow">
+    <div style="max-width:1100px;margin:0 auto;padding:0 2rem 2rem;">
+        <p class="section-label fade-in">Skills</p>
+        <h2 class="section-title fade-in">What I Work With</h2>
+    </div>
+    <div id="Slideshow_Container">
+        <div class="mySlides active-slide">
+            <img class="Slideshow_Images" src="images/my photo.jpeg" alt="Mohammed">
+            <p class="slide-text">I'm available to assist you on your project!</p>
+        </div>
+        <div class="mySlides">
+            <img class="Slideshow_Images" src="images/HTML_CSS_and_JavaScript.jpeg" alt="HTML CSS JS">
+            <p class="slide-text">HTML, CSS & JavaScript — the foundation of the web</p>
+        </div>
+        <div class="mySlides">
+            <img class="Slideshow_Images" src="images/C_Sharp_and_Dot_NET.png" alt="C#">
+            <p class="slide-text">C#, .NET Framework & ASP.NET MVC</p>
+        </div>
+        <div class="mySlides">
+            <img class="Slideshow_Images" src="images/SQL_and_Database.jpg" alt="SQL">
+            <p class="slide-text">Back-end development, databases and SQL</p>
+        </div>
+        <div class="mySlides">
+            <img class="Slideshow_Images" src="images/my photo.jpeg" alt="Mohammed">
+            <p class="slide-text"><a style="color:var(--purple-light);cursor:pointer;" onclick="openForm()">Contact me now! →</a></p>
+        </div>
+    </div>
+    <div class="slide-controls">
+        <button class="slide-btn" onclick="plusSlides(-1)">&#10094;</button>
+        <div>
+            <span class="dot active-dot" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+        <button class="slide-btn" onclick="plusSlides(1)">&#10095;</button>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section id="About">
+    <p class="section-label fade-in">Who I Am</p>
+    <h2 class="section-title fade-in">About Me</h2>
+    <div class="about-grid">
+        <div class="about-img-wrap fade-in">
+            <img src="images/my photo.jpeg" alt="Mohammed">
+        </div>
+        <div class="about-text fade-in">
+            <p>Hello! My name is <strong style="color:var(--white)">Mohammed Ali</strong>. I am a passionate web developer who enjoys building clean, modern, and functional websites.</p>
+            <p>I graduated from the <strong style="color:var(--purple-light)">Academy Of Learning</strong> Software & Web Developer program, with hands-on experience in HTML, CSS, JavaScript, C#, .NET, and SQL.</p>
+            <p>Beyond code, I'm passionate about <strong style="color:var(--cyan)">AI content creation</strong> — producing cinematic videos and visuals using cutting-edge AI tools.</p>
+            <div class="skills-chips">
+                <span class="chip">HTML/CSS</span>
+                <span class="chip">JavaScript</span>
+                <span class="chip">C# & .NET</span>
+                <span class="chip">ASP.NET MVC</span>
+                <span class="chip">SQL</span>
+                <span class="chip">Bootstrap</span>
+                <span class="chip">Entity Framework</span>
+                <span class="chip">Git & GitHub</span>
+                <span class="chip">AI Video</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="Projects">
+    <p class="section-label fade-in">My Work</p>
+    <h2 class="section-title fade-in">Projects</h2>
+
+    <div class="filter-tabs fade-in">
+        <button class="filter-tab active" onclick="filterProjects('all')">All</button>
+        <button class="filter-tab" onclick="filterProjects('csharp')">C# & .NET</button>
+        <button class="filter-tab" onclick="filterProjects('web')">Web</button>
+        <button class="filter-tab" onclick="filterProjects('client')">Client Work</button>
+    </div>
+
+    <div class="projects-grid">
+
+        <!-- C# Projects -->
+        <div class="project-card fade-in" data-category="csharp">
+            <div class="project-card-placeholder ph-blue">🏥</div>
+            <div class="project-card-body">
+                <p class="project-tag">C# · ASP.NET MVC</p>
+                <h3>Insurance MVC</h3>
+                <p>Car insurance web app that takes user policy input and calculates a quote. Includes an admin page for staff to manage issued quotes.</p>
+                <a href="https://github.com/Mido201666/InsuranceMVC" target="_blank" class="project-link">View on GitHub →</a>
+            </div>
+        </div>
+
+        <div class="project-card fade-in" data-category="csharp">
+            <div class="project-card-placeholder ph-purple">👤</div>
+            <div class="project-card-body">
+                <p class="project-tag">C# · .NET Framework</p>
+                <h3>Employee Quit</h3>
+                <p>A C# application for managing employee records and tracking employee departures with a clean data management interface.</p>
+                <a href="https://github.com/Mido201666/EmployeeQuit" target="_blank" class="project-link">View on GitHub →</a>
+            </div>
+        </div>
+
+        <!-- Web Projects -->
+        <div class="project-card fade-in" data-category="web">
+            <div class="project-card-placeholder ph-dark">🎬</div>
+            <div class="project-card-body">
+                <p class="project-tag">HTML · CSS · Bootstrap</p>
+                <h3>Movie Booking Website</h3>
+                <p>A modern website to browse and book tickets for your favorite movies, built with Bootstrap.</p>
+                <a href="https://mido201666.github.io/bootstrap4_project/" target="_blank" class="project-link">View Project →</a>
+            </div>
+        </div>
+
+        <div class="project-card fade-in" data-category="web">
+            <div class="project-card-placeholder ph-green">🌍</div>
+            <div class="project-card-body">
+                <p class="project-tag">HTML · CSS · JavaScript</p>
+                <h3>World Travel Website</h3>
+                <p>A one-page travel website showcasing destinations around the world with a clean, modern layout.</p>
+                <a href="https://mido201666.github.io/One-Page-Website/" target="_blank" class="project-link">View Project →</a>
+            </div>
+        </div>
+
+        <div class="project-card fade-in" data-category="web">
+            <div class="project-card-placeholder ph-red">🎮</div>
+            <div class="project-card-body">
+                <p class="project-tag">JavaScript</p>
+                <h3>Tic Tac Toe</h3>
+                <p>A classic Tic Tac Toe game built with vanilla JavaScript featuring a clean interactive UI.</p>
+                <a href="https://github.com/Mido201666/tictactoc-game" target="_blank" class="project-link">View on GitHub →</a>
+            </div>
+        </div>
+
+        <div class="project-card fade-in" data-category="web">
+            <div class="project-card-placeholder ph-orange">🍕</div>
+            <div class="project-card-body">
+                <p class="project-tag">JavaScript</p>
+                <h3>Pizza Menu App</h3>
+                <p>An interactive pizza ordering application with dynamic menu and order management built in JavaScript.</p>
+                <a href="https://github.com/Mido201666/JavaScript-Projects" target="_blank" class="project-link">View on GitHub →</a>
+            </div>
+        </div>
+
+        <div class="project-card fade-in" data-category="web">
+            <div class="project-card-placeholder ph-teal">💊</div>
+            <div class="project-card-body">
+                <p class="project-tag">HTML · CSS · JavaScript</p>
+                <h3>Vitamin Website</h3>
+                <p>A health-focused website providing vitamin recommendations and nutritional guidance.</p>
+                <a href="https://mido201666.github.io/Vitamin-Website/" target="_blank" class="project-link">View Project →</a>
+            </div>
+        </div>
+
+        <!-- Client Work -->
+        <div class="project-card fade-in" data-category="client">
+            <div class="project-card-placeholder ph-gold">🪵</div>
+            <div class="project-card-body">
+                <p class="project-tag">HTML · CSS · JavaScript · Client</p>
+                <h3>Art & Creativity Carpentry</h3>
+                <p>A professional website for a carpentry workshop in Al-Jubail, featuring WPC doors, kitchens, and custom furniture services.</p>
+                <a href="https://www.artcreativitycarpentry.com/" target="_blank" class="project-link">Visit Website →</a>
+            </div>
+        </div>
+
+        <div class="project-card fade-in" data-category="client">
+            <div class="project-card-placeholder ph-ai">🪔</div>
+            <div class="project-card-body">
+                <p class="project-tag">Salla · Design & Banners · Client</p>
+                <h3>Zaman Al-Baraka</h3>
+                <p>An oud and incense e-commerce store on the Salla platform. Designed all store banners and visual identity from scratch.</p>
+                <a href="https://zmanalbrkllaod.com/" target="_blank" class="project-link">Visit Store →</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- AI SECTION -->
+<div class="ai-section" id="AI">
+    <section>
+        <p class="section-label fade-in">Artificial Intelligence</p>
+        <h2 class="section-title fade-in">AI Content Creation</h2>
+        <div class="ai-banner fade-in">
+            <div class="ai-icon">🤖</div>
+            <div class="ai-content">
+                <h3>Cinematic AI Video & Image Generation</h3>
+                <p>Beyond traditional development, I explore the creative side of AI — producing cinematic videos, action scenes, and visual content using the latest AI generation tools. I apply this skill for personal creative projects as well as business advertising content.</p>
+                <div class="ai-tools">
+                    <span class="ai-tool">Seedance 2.0</span>
+                    <span class="ai-tool">Higgsfield AI</span>
+                    <span class="ai-tool">ChatGPT Image Gen</span>
+                    <span class="ai-tool">Claude AI</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- GITHUB -->
+<div class="github-section" id="GitHub">
+    <p class="section-label fade-in">Open Source</p>
+    <h2 class="section-title fade-in" style="max-width:600px;margin:0 auto;">Check Out My GitHub</h2>
+    <a href="https://github.com/Mido201666" target="_blank" class="github-card fade-in">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+        <div class="github-card-text">
+            <strong>Mido201666</strong>
+            <span>View all my projects on GitHub</span>
+        </div>
+    </a>
+</div>
+
+<!-- CONTACT -->
+<div class="form-popup" id="myForm">
+    <div class="form-container">
+        <h1>Contact Me</h1>
+        <form action="https://formspree.io/your@email.com" method="POST">
+            <label>Name</label>
+            <input type="text" placeholder="Your name" name="name" required>
+            <label>Phone</label>
+            <input type="text" placeholder="Your phone number" name="phone">
+            <label>Email</label>
+            <input type="email" placeholder="Your email address" name="email" required>
+            <label>Message</label>
+            <input type="text" placeholder="Your message" name="message">
+            <div class="form-btns">
+                <button type="submit" class="btn-submit">Send Message</button>
+                <button type="button" class="btn-cancel" onclick="closeForm()">Close</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Mohammed Ali — All Rights Reserved</p>
+</footer>
+
+<script>
+    // SLIDESHOW
+    let slideIndex = 0;
+    const slides = document.querySelectorAll('.mySlides');
+    const dots = document.querySelectorAll('.dot');
+    function showSlide(n) {
+        slides.forEach(s => s.classList.remove('active-slide'));
+        dots.forEach(d => d.classList.remove('active-dot'));
+        slideIndex = (n + slides.length) % slides.length;
+        slides[slideIndex].classList.add('active-slide');
+        dots[slideIndex].classList.add('active-dot');
+    }
+    function plusSlides(n) { showSlide(slideIndex + n); }
+    function currentSlide(n) { showSlide(n); }
+    setInterval(() => plusSlides(1), 4000);
+
+    // CONTACT
+    function openForm() { document.getElementById('myForm').classList.add('open'); }
+    function closeForm() { document.getElementById('myForm').classList.remove('open'); }
+    document.getElementById('myForm').addEventListener('click', function(e) { if (e.target === this) closeForm(); });
+
+    // FILTER
+    function filterProjects(cat) {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        event.target.classList.add('active');
+        document.querySelectorAll('.project-card').forEach(card => {
+            if (cat === 'all' || card.dataset.category === cat) {
+                card.removeAttribute('data-hidden');
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    // SCROLL FADE
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // NAVBAR ACTIVE
+    const sections = document.querySelectorAll('[id]');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+        document.querySelectorAll('.Navbar a').forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+        });
+    });
+</script>
+</body>
+</html>
